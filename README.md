@@ -49,7 +49,7 @@ All methods return Ruby hashes.
 ```
 
 
-## Immediate Next Stops
+## Immediate Next Steps
 
 + Implement all to-be-implemented methods (already in the code, marked by the `NotImplementedError`s)
 + Improve the code / file structure. It's not great as-is. This is very early in development.
@@ -72,6 +72,6 @@ All methods return Ruby hashes.
 
 ## Copyright
 
-Copyright (c) 2014 beechnut. See LICENSE.txt for
+Copyright (c) 2014 Matt Cloyd. See LICENSE.txt for
 further details.
 

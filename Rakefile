@@ -14,13 +14,16 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
-  gem.name = "mbta-realtime"
-  gem.homepage = "http://github.com/beechnut/mbta-realtime"
-  gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "cloydster@gmail.com"
-  gem.authors = ["beechnut"]
+  gem.name        = "mbta-realtime"
+  gem.homepage    = "http://github.com/beechnut/mbta-realtime"
+  gem.license     = "MIT"
+  gem.summary     = %Q{Get schedules, predictions, and other data from the MBTA Realtime V2 API}
+  gem.description = %Q{The MBTA Realtime V2 API unifies "schedule, alert, 
+                       vehicle position, and arrival prediction data". The MBTA Realtime gem
+                       provides a Ruby interface to the API, presenting results using
+                       sensible Ruby defaults.}
+  gem.email       = "cloydster@gmail.com"
+  gem.authors     = ["Matt Cloyd"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new

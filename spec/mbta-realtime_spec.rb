@@ -23,10 +23,6 @@ describe MBTARealtime do
   end
 end
 
-# describe MBTARealtime do
-  
-#   subject { MBTARealtime::Client.new('wX9NwuHnZU2ToO7GmGR9u') }
-
 #   context "route queries" do
 #     describe "#routes" do
 #       it "returns an array of routes" do

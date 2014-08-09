@@ -1,4 +1,4 @@
-# mbta-realtime
+# MBTA Realtime
 
 Description goes here.
 
@@ -14,9 +14,7 @@ require 'mbta-realtime' # 'mbta_realtime' also works
 Initialize it with your API key.
 
 ```ruby
-@mbta = MBTARealtime.new("your_api_key")
-# or
-@mbta = MBTARealtime.new(api_key: "your_api_key")
+@mbta = MBTARealtime::Client.new(api_key: "your_api_key")
 ```
 
 If you keep your API key in an environment variable (or .env file with [Dotenv](https://github.com/bkeepers/dotenv)), such as
@@ -31,16 +29,35 @@ you can initialize your MBTA Realtime client with
 @mbta = MBTARealtime.new(ENV['MBTA_API_KEY'])
 ```
 
+All methods return Ruby hashes.
+
+### Routes
+
+`#routes` returns all the routes in the system.
+
+```ruby
+@mbta.routes
+# => {"mode"=>[{"route_type"=>"0", "mode_name"=>"Subway", "route"=>[{"route_id"=>"810_", "route_name"=>"Green Line"}, {"route_id"=>"813_", "route_name"=>"Green Line"}
+# ... rest truncated for brevity ...
+```
+
+`#routes_by_stop(stop_id)` returns all the routes for a given stop, indicated by its unique stop id.
+
+```ruby
+@mbta.routes_by_stop(1395)
+# => {"stop_id"=>"1395", "stop_name"=>"Dartmouth St @ Appleton St", "mode"=>[{"route_type"=>"3", "mode_name"=>"Bus", "route"=>[{"route_id"=>"10", "route_name"=>"10"}, {"route_id"=>"170", "route_name"=>"170"}]}]} 
+```
 
 
-### API Mirror
+## Immediate Next Stops
 
-Most of the methods mirror those of the API, which is convenient when 
++ Implement all to-be-implemented methods (already in the code, marked by the `NotImplementedError`s)
++ Improve the code / file structure. It's not great as-is. This is very early in development.
++ Set up smart, clean tests.
++ Assert and possibly test the API key provided
++ Instead of hashes, return value objects for `Stop`, `Route`, `Prediction`, etc., with other value objects nested within.
 
-@mbta.stops_by_location
 
-
-### 
 
 
 ## Contributing to mbta-realtime

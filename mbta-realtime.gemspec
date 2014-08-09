@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
+    ".ruby-gemset",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
@@ -28,6 +29,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "lib/mbta-realtime.rb",
     "lib/mbta-realtime/client.rb",
+    "lib/mbta-realtime/client/routes.rb",
     "lib/mbta-realtime/version.rb",
     "mbta-realtime.gemspec",
     "spec/mbta-realtime_spec.rb",

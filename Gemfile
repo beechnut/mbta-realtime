@@ -9,6 +9,9 @@ source "http://rubygems.org"
 gem "rest-client", ">= 0"
 gem "httparty",    ">= 0"
 
+gem "geocoder",    ">= 0"
+
+
 group :development do
   gem "shoulda",   ">= 0"
   gem "rdoc",      "~> 3.12"

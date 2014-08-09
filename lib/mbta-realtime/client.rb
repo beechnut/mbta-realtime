@@ -1,3 +1,5 @@
+require 'geocoder'
+
 module MBTARealtime
   class Client
     include HTTParty
@@ -15,6 +17,9 @@ module MBTARealtime
     end
 
 
+    # Routes
+
+
     def routes
       self.class.get("/routes", @options).to_h
     end
@@ -25,18 +30,43 @@ module MBTARealtime
     end
 
 
+    # Stops
+    
+
     def stops_by_route(route_id)
-      raise NotImplementedError
+      self.class.get("/stopsbyroute", url_opts({route: route_id})).to_h
     end
 
 
-    def stops_by_location(location)
-      raise NotImplementedError
+    def stops_by_location(location={})
+      # Requires a hash {lat: 42.35291,lon: -71.064648}
+      self.class.get("/stopsbylocation", url_opts( location )).to_h
+    end
+
+
+    def nearest_stop(location={})
+      stops_by_location(location)["stop"].first
+    end
+
+
+    def nearest_stop_id(location={})
+      nearest_stop(location)["stop_id"]
     end
 
 
     def stops_by_location_name(intersection)
-      raise NotImplementedError
+      lat, lng = Geocoder.coordinates(intersection)
+      stops_by_location(lat: lat, lon: lng)
+    end
+
+    
+    def nearest_stop_by_location_name(intersection)
+      stops_by_location_name(intersection)["stop"].first
+    end
+
+
+    def nearest_stop_id_by_location_name(intersection)
+      nearest_stop_by_location_name(intersection)["stop_id"]
     end
 
 
@@ -69,9 +99,6 @@ module MBTARealtime
 
   end
 end
-
-    
-    # private
 
     #   def assert_api_key
     #     unless @api_key

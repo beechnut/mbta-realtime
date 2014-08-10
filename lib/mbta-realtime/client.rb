@@ -75,8 +75,9 @@ module MBTARealtime
     end
 
 
-    def predictions_by_stop(stop_id)
-      raise NotImplementedError
+    def predictions_by_stop(stop_id, flatten=false)
+      ps = self.class.get("/predictionsbystop", url_opts({stop: stop_id})).to_h
+      flatten ? flatten_predictions(ps) : ps
     end
 
 
@@ -85,13 +86,9 @@ module MBTARealtime
     end
 
 
-    def predictions_by_location(location)
-      raise NotImplementedError
-    end
-
-
-    def predictions_by_location_name(intersection)
-      raise NotImplementedError
+    def predictions_by_location_name(intersection, flatten=false)
+      ps = predictions_by_stop( nearest_stop_id_by_location_name(intersection) )
+      flatten ? flatten_predictions( ps ) : ps
     end
 
 
@@ -100,6 +97,29 @@ module MBTARealtime
 
       def url_opts(args={})
         { query: @options[:query].merge( args ) }
+      end
+
+      def flatten_predictions(predictions_response)
+        @predictions = []
+
+        travel_modes = predictions_response['mode']
+        travel_modes.each do |mode|
+          routes = mode['route']
+          routes.each do |route|
+            route_obj  = OpenStruct.new(id: route['route_id'], name: route['route_name'], trips: [])
+            directions = route['direction']
+            directions.each do |dir|
+              trips = dir['trip']
+              trips.each do |trip|
+                route_obj.trips << OpenStruct.new(id:    trip['trip_id'],
+                                                  time:  trip['pre_away'])
+              end
+            end
+
+            @predictions << route_obj
+          end
+        end
+        @predictions
       end
 
   end

@@ -81,6 +81,20 @@ module MBTARealtime
     end
 
 
+    def predictions_by_stop_and_route(stop_id, route_ids)
+      preds = predictions_by_stop(stop_id)
+      rids  = route_ids.map {|i| i.to_s }
+      
+      puts "preds: #{preds.inspect}"
+      puts "rids: #{rids.inspect}"
+
+      preds['mode'].each do |mode|
+        # Keep only predictions that are within the route ID
+        mode['route'].keep_if { |route| rids.include?(route['route_name']) }
+      end
+    end
+
+
     def predictions_by_route(route_id)
       raise NotImplementedError
     end

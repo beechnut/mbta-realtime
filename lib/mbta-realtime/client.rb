@@ -31,7 +31,12 @@ module MBTARealtime
 
 
     # Stops
-    
+
+
+    def stop_name(stop_id)
+      self.class.get("/schedulebystop", url_opts({stop: stop_id})).to_h["stop_name"]
+    end
+
 
     def stops_by_route(route_id)
       self.class.get("/stopsbyroute", url_opts({route: route_id})).to_h
@@ -57,11 +62,6 @@ module MBTARealtime
     def stops_by_location_name(intersection)
       lat, lng = Geocoder.coordinates(intersection)
       stops_by_location(lat: lat, lon: lng)
-    end
-
-
-    def stop_name(stop_id)
-      self.class.get("/schedulebystop", url_opts({stop: stop_id})).to_h["stop_name"]
     end
 
     

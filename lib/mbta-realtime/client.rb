@@ -59,6 +59,11 @@ module MBTARealtime
       stops_by_location(lat: lat, lon: lng)
     end
 
+
+    def stop_name(stop_id)
+      self.class.get("/schedulebystop", url_opts({stop: stop_id})).to_h["stop_name"]
+    end
+
     
     def nearest_stop_by_location_name(intersection)
       stops_by_location_name(intersection)["stop"].first
